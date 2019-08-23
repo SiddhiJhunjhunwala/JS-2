@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Reaction tester</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap');
+        #object{
+            background-color: red;
+            width: 200px;
+            height: 200px;
+            display: none;
+            position: relative;
+            top:100px;
+            left: 200px;
+        }
+
+        #result{
+            font-family: 'Lexend Deca', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test your reactions!</h1>
+    <p id="result"></p>
+    <div id="object">
+    </div>
+
+
+    <script>
+        var start=new Date().getTime();
+        function getRandomColor() {
+         var letters = '0123456789ABCDEF';
+         var color = '#';
+
+         if(Math.random()>0.5){
+
+             document.getElementById("object").style.borderRadius="50%";
+         }
+         else{
+            document.getElementById("object").style.borderRadius="0";
+         }
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+        }
+
+        function appear(){
+          var top= Math.random()*400;
+          var left=Math.random()*400;
+          var width=(Math.random()*200)+100;
+        //   var height=Math.random()*400
+          document.getElementById("object").style.backgroundColor=getRandomColor();
+          document.getElementById("object").style.width=width+"px";
+          document.getElementById("object").style.height=width+"px";
+
+          document.getElementById("object").style.top=top+"px";
+          document.getElementById("object").style.left=left+"px";
+          document.getElementById("object").style.display="block";
+          start= new Date().getTime();
+      
+
+        }
+
+        function delay(){
+         setTimeout(appear, Math.random()*2000);//upto 2 sec 
+        }
+
+        delay();
+        document.getElementById("object").onclick=function(){
+            
+        document.getElementById("object").style.display="none";
+        var end=new Date().getTime();
+        var time= end-start;//ms
+        time=time/1000;
+        
+        document.getElementById("result").innerHTML="Time taken is "+time+"s";
+        delay();
+        }
+    </script>
+</body>
+</html>
